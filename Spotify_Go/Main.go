@@ -2,6 +2,7 @@ package main
 
 import (
     "encoding/json"
+    "os"
 	"fmt"
 	"log"
 	"net/http"
@@ -23,8 +24,9 @@ func main() {
 	})
 	go http.ListenAndServe(":8080", nil)
 
-    clientID := "3b0e667366d34ff0b6148d3f8e7fb6a3"
-    secretKey := "acdb971b0c4645e88c8c0618f7330d09"
+    clientID := os.Getenv("SPOTIFY_CLIENT_ID")
+    secretKey := os.Getenv("SPOTIFY_SECRET_KEY")
+
     auth.SetAuthInfo(clientID, secretKey)
 	url := auth.AuthURL(state)
 	fmt.Println("Please log in to Spotify by visiting the following page in your browser:", url)
@@ -36,9 +38,8 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
+
 	fmt.Println("You are logged in as:", user.ID)
-
-
     retrievePlaylistIDs(client);
 }
 
@@ -68,10 +69,13 @@ func retrievePlaylistIDs(client *spotify.Client) {
       log.Fatal(err)
    }
 
-   jsonData, err := json.Marshal(playlists)
+   fmt.Println(string(dumpToJson(playlists)))
+}
+
+func dumpToJson(value interface{}) (jsonData []byte) {
+   jsonData, err := json.Marshal(value)
    if err != nil {
       log.Println(err)
    }
-   fmt.Println(string(jsonData))
+   return
 }
-
