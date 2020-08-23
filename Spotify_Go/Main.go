@@ -1,6 +1,7 @@
 package main
 
 import (
+    "encoding/json"
 	"fmt"
 	"log"
 	"net/http"
@@ -38,7 +39,7 @@ func main() {
 	fmt.Println("You are logged in as:", user.ID)
 
 
-    retrievePlaylistIDs(ch);
+    retrievePlaylistIDs(client);
 }
 
 func completeAuth(w http.ResponseWriter, r *http.Request) {
@@ -57,8 +58,20 @@ func completeAuth(w http.ResponseWriter, r *http.Request) {
 	ch <- &client
 }
 
-func retrievePlaylistIDs(client chan *spotify.Client) {
+func retrievePlaylistIDs(client *spotify.Client) {
    user, err := client.CurrentUser()
-   client.Playlists.GetPlaylistsForUser(user.ID)
+   if err != nil {
+      log.Fatal(err)
+   }
+   playlists, err := client.GetPlaylistsForUser(user.ID)
+   if err != nil {
+      log.Fatal(err)
+   }
+
+   jsonData, err := json.Marshal(playlists)
+   if err != nil {
+      log.Println(err)
+   }
+   fmt.Println(string(jsonData))
 }
 
