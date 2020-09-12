@@ -46,7 +46,7 @@ func retrievePaginatedPlaylists(client *spotify.Client) (result []spotify.Simple
 func getSongsForPlaylist(client *spotify.Client, playlistId spotify.ID) (result []spotify.PlaylistTrack) {
     var offset = 0
     var limit  = 100
-    var fields = "items(track(name,href,album(name,href)))"
+    var fields = "items(track(name,href,artists(name),album(name,href)))"
 
     opts := spotify.Options{}
     opts.Limit = &limit
