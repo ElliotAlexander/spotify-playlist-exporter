@@ -36,13 +36,12 @@ func main() {
     client := <-ch
 	playlists := handleCallback(client)
 
-	jsonData, err := json.Marshal(playlists)
-    if err != nil {
-        log.Println(err)
+    for _, playlist := range playlists {
+        tracks := getSongsForPlaylist(client, playlist.ID)
+        for _, track := range tracks {
+            fmt.Println(track.Track)
+        }
     }
-    fmt.Println(string(jsonData))
-
-	writeToFile(jsonData)
 }
 
 func check(e error) {
