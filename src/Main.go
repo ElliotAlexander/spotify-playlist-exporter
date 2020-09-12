@@ -21,7 +21,7 @@ func main() {
     http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
         log.Println("Got request for:", r.URL.String())
     })
-    go http.ListenAndServe(":8080", nil)
+    go log.Fatal(http.ListenAndServe(":8080", nil))
 
     clientID := os.Getenv("SPOTIFY_CLIENT_ID")
     secretKey := os.Getenv("SPOTIFY_SECRET_KEY")

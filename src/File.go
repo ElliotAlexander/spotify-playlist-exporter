@@ -9,6 +9,7 @@ import (
 func writeToFile(path string, filename string, data []byte) {
     // Playlists with forward slashes in their name will break without this.
     filepath := path + stripSlashes(filename)
+    if fileExists(filepath) { return }
     err := ioutil.WriteFile(filepath, data, 0644)
     if err != nil {
         panic(err)
