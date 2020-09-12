@@ -1,7 +1,6 @@
 package main
 
 import (
-    "encoding/json"
     "os"
     "fmt"
     "log"
@@ -29,29 +28,25 @@ func main() {
 
     auth.SetAuthInfo(clientID, secretKey)
     url := auth.AuthURL(state)
-    fmt.Println("Please log in to Spotify by visiting the following page in your browser:", url)
+    openBrowser(url)
 
-    // wait for auth to complete
     client := <-ch
 	playlists := handleCallback(client)
-
 
     for _, playlist := range playlists {
         tracks := getSongsForPlaylist(client, playlist.ID)
         fmt.Fprintf(os.Stdout, "\n\nPlaylist Name: %s\n", playlist.Name)
         value := dumpToJson(tracks)
-        writeToFile("playlists/"+playlist.Name+".json", value)
+        writeToFile("playlists/", playlist.Name+".json", value)
         for _, track := range tracks {
-            artist := track.Track.Artists[0].Name
-            fmt.Fprintf(os.Stdout, "%s - %s", track.Track.Name, artist)
+            artistStr := ""
+            for _, artist := range track.Track.Artists {
+                artistStr += artist.Name+", "
+            }
+            fmt.Fprintf(os.Stdout, "\t- %s - %s\n", track.Track.Name, artistStr)
         }
     }
+
+    fmt.Println("\n\n\nDone!")
 }
 
-func dumpToJson(value interface{}) (jsonData []byte) {
-    jsonData, err := json.Marshal(value)
-    if err != nil {
-        log.Println(err)
-    }
-    return
-}
