@@ -7,7 +7,6 @@ import (
     "log"
     "net/http"
     "github.com/zmb3/spotify"
-    "io/ioutil"
 )
 
 const redirectURI = "http://localhost:8080/callback"
@@ -36,20 +35,18 @@ func main() {
     client := <-ch
 	playlists := handleCallback(client)
 
+
     for _, playlist := range playlists {
         tracks := getSongsForPlaylist(client, playlist.ID)
+        fmt.Fprintf(os.Stdout, "\n\nPlaylist Name: %s\n", playlist.Name)
+        value := dumpToJson(tracks)
+        writeToFile("playlists/"+playlist.Name+".json", value)
         for _, track := range tracks {
-            fmt.Println(track.Track)
+            artist := track.Track.Artists[0].Name
+            fmt.Fprintf(os.Stdout, "%s - %s", track.Track.Name, artist)
         }
     }
 }
-
-func check(e error) {
-    if e != nil {
-	    panic(e)
-    }
-}
-
 
 func dumpToJson(value interface{}) (jsonData []byte) {
     jsonData, err := json.Marshal(value)
@@ -57,9 +54,4 @@ func dumpToJson(value interface{}) (jsonData []byte) {
         log.Println(err)
     }
     return
-}
-
-func writeToFile(data []byte) {
-    err := ioutil.WriteFile("/tmp/dat1", data, 0644)
-    check(err)
 }
