@@ -4,7 +4,6 @@ import (
     "fmt"
     "log"
     "net/http"
-    "github.com/zmb3/spotify"
 )
 
 func completeAuth(w http.ResponseWriter, r *http.Request) {
