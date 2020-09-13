@@ -31,7 +31,7 @@ func main() {
     openBrowser(url)
 
     client := <-ch
-	playlists := handleCallback(client)
+    playlists := handleCallback(client)
 
     for _, playlist := range playlists {
         tracks := getSongsForPlaylist(client, playlist.ID)
@@ -49,4 +49,16 @@ func main() {
 
     fmt.Println("\n\n\nDone!")
 }
+
+func handleCallback(client *spotify.Client)  (playlistArr []spotify.SimplePlaylist){
+    user, err := client.CurrentUser()
+    if err != nil {
+        log.Fatal(err)
+    }
+
+    fmt.Println("You are logged in as:", user.ID)
+    playlistArr = retrievePaginatedPlaylists(client)
+    return
+}
+
 

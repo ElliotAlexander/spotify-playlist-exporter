@@ -7,17 +7,6 @@ import (
     "github.com/zmb3/spotify"
 )
 
-func handleCallback(client *spotify.Client)  (playlistArr []spotify.SimplePlaylist){
-    user, err := client.CurrentUser()
-    if err != nil {
-        log.Fatal(err)
-    }
-
-    fmt.Println("You are logged in as:", user.ID)
-    playlistArr = retrievePaginatedPlaylists(client)
-    return
-}
-
 func completeAuth(w http.ResponseWriter, r *http.Request) {
     tok, err := auth.Token(state, r)
     if err != nil {
