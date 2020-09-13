@@ -49,7 +49,7 @@ func getSongsForPlaylist(client *spotify.Client, playlistId spotify.ID) (result 
     var fields = "items(track(name,href,artists(name),album(name,href)))"
 
     opts := spotify.Options{}
-    opts.Limit = &limit
+    opts.Limit  = &limit
     opts.Offset = &offset
 
     for {
