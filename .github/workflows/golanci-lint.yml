@@ -12,6 +12,10 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: |
+            go version
+            go get -u github.com/zmb3/spotify
       - name: golangci-lint
         uses: golangci/golangci-lint-action@v2
         with:
