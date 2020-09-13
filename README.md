@@ -1,6 +1,6 @@
 # Spotify Playlist Exporter
 
-![Lint](https://github.com/ElliotAlexander/Spotify-exporter/workflows/golangci-ling/badge.svg)
+![Lint](https://github.com/ElliotAlexander/Spotify-exporter/workflows/golangci-lint/badge.svg)
 
 This is a simple Go tool to pull a complete backup of your spotify playlists to JSON. The intention behind this is to have a file-backup of the contents of your spotify playlists (I have several hundred!) in the event that I ever want to move away from spotify, or my account is deleted/hacked/lost/other playlist-data losing event. 
 
