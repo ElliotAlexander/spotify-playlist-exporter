@@ -8,6 +8,7 @@ import (
 
 	"github.com/zmb3/spotify/v2"
 )
+
 func (s *Spotify) retrievePlaylistIDs(opts *spotify.Options) (playlists *spotify.SimplePlaylistPage) {
 	user, err := s.client.CurrentUser(context.Background())
 	if err != nil {
@@ -26,7 +27,7 @@ func (s *Spotify) retrievePaginatedPlaylists() (result []spotify.SimplePlaylist)
 	var offset = 0
 	var limit = 50
 
-	opts := spotify.Options{}
+	opts := spotify.RequestOption{}
 	opts.Limit = &limit
 	opts.Offset = &offset
 
