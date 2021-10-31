@@ -6,8 +6,8 @@ package graph
 import (
 	"context"
 
-	"github.com/elliotalexander/spotify_exporter/api/graph/generated"
-	"github.com/elliotalexander/spotify_exporter/lib/auth"
+	"github.com/elliotalexander/spotify-playlist-exporter/api/graph/generated"
+	"github.com/elliotalexander/spotify-playlist-exporter/lib/auth"
 )
 
 func (r *queryResolver) Login(ctx context.Context) (string, error) {

@@ -1,4 +1,4 @@
-module github.com/elliotalexander/spotify_exporter/api
+module github.com/elliotalexander/spotify-playlist-exporter/api
 
 go 1.17
 
