@@ -1,4 +1,4 @@
-module github.com/elliotalexander/spotify-playlist-exporter/lib
+module lib
 
 go 1.17
 
@@ -10,7 +10,7 @@ require (
 
 require (
 	github.com/golang/protobuf v1.5.2 // indirect
-	golang.org/x/net v0.0.0-20211029224645-99673261e6eb // indirect
+	golang.org/x/net v0.0.0-20210813160813-60bc85c4be6d // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.27.1 // indirect
 )

@@ -2,6 +2,8 @@ module github.com/elliotalexander/spotify-playlist-exporter/api
 
 go 1.17
 
+replace github.com/elliotalexander/spotify_exporter/lib@0.1 => lib@0.1
+
 require (
 	github.com/99designs/gqlgen v0.14.0
 	github.com/vektah/gqlparser/v2 v2.2.0

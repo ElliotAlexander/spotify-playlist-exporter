@@ -7,8 +7,8 @@ import (
 
 	"github.com/99designs/gqlgen/graphql/handler"
 	"github.com/99designs/gqlgen/graphql/playground"
-	"github.com/elliotalexander/spotify_exporter/api/graph"
-	"github.com/elliotalexander/spotify_exporter/api/graph/generated"
+	"github.com/elliotalexander/spotify-playlist-exporter/api/graph"
+	"github.com/elliotalexander/spotify-playlist-exporter/api/graph/generated"
 )
 
 const defaultPort = "8080"
